@@ -2,20 +2,23 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import SagaApp from './components/Navigation/web/App'
+import configureStore from "./components/Navigation/core/store/configureStore";
 import * as serviceWorker from './serviceWorker';
 import 'tachyons';
-import {createStore, combineReducers} from 'redux'
-import allReducers from './reducers/index'
+import {createStore, combineReducers, applyMiddleware, compose} from 'redux'
+
+
 import {Provider} from 'react-redux'
 
-const mystore = createStore(allReducers,   (window as any).__REDUX_DEVTOOLS_EXTENSION__ &&
-(window as any).__REDUX_DEVTOOLS_EXTENSION__()
-);
+const store = configureStore();
+
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={mystore}>
+    <Provider store={store}>
     <App />
+    
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
